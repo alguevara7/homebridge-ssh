@@ -15,6 +15,7 @@ function SshAccessory(log, config) {
 	this.name = config['name'];
 	this.onCommand = config['on'];
 	this.offCommand = config['off'];
+	this.stateCommand = config['state'];
 	this.user = config['user'];
 	this.host = config['host'];
 	this.password = config['password'];
@@ -43,6 +44,28 @@ SshAccessory.prototype.setState = function(powerOn, callback) {
 	});
 }
 
+SshAccessory.prototype.getState = function(callback) {
+        var accessory = this;
+        var command = accessory['stateCommand'];
+
+        var stream = ssh(command, {
+                user: accessory.user,
+                host: accessory.host,
+                password: accessory.password
+        });
+
+        stream.on('error', function (err) {
+                accessory.log('Error: ' + err);
+                callback(err || new Error('Error getting state of ' + accessory.name));
+        });
+
+        stream.on('data', function (data) {
+		var state = data.toString('utf-8').trim();
+                accessory.log('State of ' + accessory.name + ' is: ' + state);
+                callback(null, state === 'playing' ? true : false);
+        });
+}
+
 SshAccessory.prototype.getServices = function() {
 	var informationService = new Service.AccessoryInformation();
 	var switchService = new Service.Switch(this.name);
@@ -52,9 +75,12 @@ SshAccessory.prototype.getServices = function() {
 		.setCharacteristic(Characteristic.Model, 'SSH Model')
 		.setCharacteristic(Characteristic.SerialNumber, 'SSH Serial Number');
 
-	switchService
-		.getCharacteristic(Characteristic.On)
+	var characteristic = switchService.getCharacteristic(Characteristic.On)
 		.on('set', this.setState.bind(this));
+
+	if (this.stateCommand) {
+		characteristic.on('get', this.getState.bind(this))
+	};
 
 	return [switchService];
 }
