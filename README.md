@@ -16,12 +16,13 @@ Configuration sample:
 ```
 "accessories": [
 	{
-		"accessory": "ssh",
-		"name": "Electronic Music",
-		"on": "tell application ''Evocam'' to open ''Security.evocamsettings''",
-		"off": "quit application ''Evocam''"
+              "accessory": "SSH",
+              "name": "iTunes Music",
+              "on": "tell application \"iTunes\" to play",
+              "off": "tell application \"iTunes\" to stop",
+              "user": "me",
+              "host": "mymac",
+              "password: "password"
 	}
 ]
 ```
-
-Note that two successive single-quotes (`''`) will be automatically converted to double-quotes.

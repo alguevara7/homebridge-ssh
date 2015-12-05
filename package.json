@@ -1,0 +1,23 @@
+{
+  "name": "homebridge-ssh",
+  "version": "0.0.1",
+  "description": "SSH plugin for homebridge: https://github.com/nfarina/homebridge",
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": {
+    "name": "Alexei Guevara"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zb0th/homebridge-ssh.git"
+  },
+  "dependencies": {
+    "ssh-exec": "^1.3.0"
+  }
+}
