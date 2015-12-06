@@ -1,5 +1,5 @@
-homebridge-applescript
-======================
+homebridge-ssh
+==============
 
 Supports triggering ssh commands on the HomeBridge platform.
 
@@ -18,8 +18,9 @@ Configuration sample:
 	{
               "accessory": "SSH",
               "name": "iTunes Music",
-              "on": "tell application \"iTunes\" to play",
-              "off": "tell application \"iTunes\" to stop",
+              "on": "osascript -e 'tell application \"iTunes\" to play'",
+              "off": "osascript -e 'tell application \"iTunes\" to stop'",
+              "state": "osascript -e 'tell application \"iTunes\" to get player state'",
               "user": "me",
               "host": "mymac",
               "password: "password"
