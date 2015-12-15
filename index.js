@@ -19,6 +19,7 @@ function SshAccessory(log, config) {
   this.user = config['user'];
   this.host = config['host'];
   this.password = config['password'];
+  this.key = config['key'];
 }
 
 SshAccessory.prototype.setState = function(powerOn, callback) {
@@ -30,7 +31,8 @@ SshAccessory.prototype.setState = function(powerOn, callback) {
   var stream = ssh(command, {
     user: accessory.user,
     host: accessory.host,
-    password: accessory.password
+    password: accessory.password,
+    key: accessory.key
   });
 
   stream.on('error', function (err) {
