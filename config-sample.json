@@ -1,23 +1,23 @@
 {
-	"bridge": {
-		"name": "Homebridge",
-		"username": "CD:22:3D:E3:CE:30",
-		"port": 51826,
-		"pin": "031-45-154"
-	},
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CD:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
 
-	"description": "This is an example configuration for the SSH homebridge plugin",
+  "description": "This is an example configuration for the SSH homebridge plugin",
 
-	"accessories": [
-		{
-			"accessory": "SSH",
-			"name": "iTunes Music",
-			"on": "osascript -e 'tell application \"iTunes\" to play'",
-			"off": "osascript -e 'tell application \"iTunes\" to stop'",
-			"state": "osascript -e 'tell application \"iTunes\" to get player state'",
-			"user": "me",
-			"host": "mymac",
-			"password: "password"
-		}
-	]
+  "accessories": [
+    {
+      "accessory": "SSH",
+      "name": "iTunes Music",
+      "on": "osascript -e 'tell application \"iTunes\" to play'",
+      "off": "osascript -e 'tell application \"iTunes\" to stop'",
+      "state": "osascript -e 'tell application \"iTunes\" to get player state'",
+      "user": "me",
+      "host": "mymac",
+      "password: "password"
+    }
+  ]
 }
