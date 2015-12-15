@@ -23,7 +23,8 @@ Configuration sample:
               "state": "osascript -e 'tell application \"iTunes\" to get player state'",
               "user": "me",
               "host": "mymac",
-              "password: "password"
+              "password": "password (or use key)",
+              "key": "path to private key file"
 	}
 ]
 ```
