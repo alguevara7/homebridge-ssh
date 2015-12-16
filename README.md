@@ -21,10 +21,13 @@ Configuration sample:
               "on": "osascript -e 'tell application \"iTunes\" to play'",
               "off": "osascript -e 'tell application \"iTunes\" to stop'",
               "state": "osascript -e 'tell application \"iTunes\" to get player state'",
-              "user": "me",
-              "host": "mymac",
-              "password": "password (or use key)",
-              "key": "path to private key file"
+              "ssh": {
+                "user": "me",
+                "host": "mymac",
+                "port": 22,
+                "password": "password (or use key)",
+                "key": "path to private key file"
+              }
 	}
 ]
 ```
