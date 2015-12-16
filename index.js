@@ -1,7 +1,8 @@
 var Service;
 var Characteristic;
 
-var ssh = require('ssh-exec');
+var ssh = require('ssh-exec'),
+    assign = require('object-assign');
 
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
@@ -12,14 +13,17 @@ module.exports = function(homebridge) {
 function SshAccessory(log, config) {
   this.log = log;
   this.service = 'Switch';
+
   this.name = config['name'];
   this.onCommand = config['on'];
   this.offCommand = config['off'];
   this.stateCommand = config['state'];
-  this.user = config['user'];
-  this.host = config['host'];
-  this.password = config['password'];
-  this.key = config['key'];
+  this.ssh = assign({
+    user: config['user'],
+    host: config['host'],
+    password: config['password'],
+    key: config['key']
+  }, config['ssh']);
 }
 
 SshAccessory.prototype.setState = function(powerOn, callback) {
@@ -28,12 +32,7 @@ SshAccessory.prototype.setState = function(powerOn, callback) {
   var prop = state + 'Command';
   var command = accessory[prop];
 
-  var stream = ssh(command, {
-    user: accessory.user,
-    host: accessory.host,
-    password: accessory.password,
-    key: accessory.key
-  });
+  var stream = ssh(command, accessory.ssh);
 
   stream.on('error', function (err) {
     accessory.log('Error: ' + err);
@@ -50,11 +49,7 @@ SshAccessory.prototype.getState = function(callback) {
   var accessory = this;
   var command = accessory['stateCommand'];
 
-  var stream = ssh(command, {
-    user: accessory.user,
-    host: accessory.host,
-    password: accessory.password
-  });
+  var stream = ssh(command, accessory.ssh);
 
   stream.on('error', function (err) {
     accessory.log('Error: ' + err);
