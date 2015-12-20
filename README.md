@@ -21,6 +21,8 @@ Configuration sample:
               "on": "osascript -e 'tell application \"iTunes\" to play'",
               "off": "osascript -e 'tell application \"iTunes\" to stop'",
               "state": "osascript -e 'tell application \"iTunes\" to get player state'",
+              "on_value" : "playing",
+              "exact_match": true,
               "ssh": {
                 "user": "me",
                 "host": "mymac",
